@@ -1,13 +1,16 @@
 <template>
   <button class="g-button" :class="{[`icon-${iconPosition}`]:true}" @click="$emit('click')">
     <icon  v-if="loading"   class="loading icon" name="load-5"></icon>
-    <icon class=" icon"  v-if='icon&&!loading' :name='icon'></icon>
+    <icon class="icon"  v-if='icon&&!loading' :name='icon'></icon>
     <div class="content">
       <slot/>
     </div>
   </button>
 </template>
 <script>
+  import Vue from 'vue'
+  import icon from './Icon'
+  Vue.component('icon',icon)
   export default {
 props:{
 icon:{},
