@@ -20,7 +20,7 @@
      --border-color-hover: #666;
    }
    IE 15 及以上浏览器都支持此样式。
-   2. 安装 
+ 2. 安装 
    ```$xslt
 npm i  --save ui-gulu-demo1
 ```
@@ -28,7 +28,6 @@ npm i  --save ui-gulu-demo1
 ```
 import {Button, ButtonGroup, icon} from 'ui-gulu-demo1'
 import 'ui-gulu-demo1/dist/index.css'
-
 export default {
   name: 'app',
   components: {
@@ -36,7 +35,7 @@ export default {
     'g-icon':icon
   }
 }
-
+```
 
 
 
