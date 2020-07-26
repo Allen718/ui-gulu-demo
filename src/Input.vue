@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper" :class="{error}">
-    <input type="text" :value="value" :disabled="disabled" :readonly="readonly"/>
+    <input type="text" :value="value" :disabled="disabled" :readonly="readonly"
+    @change="$emit('change',$event)" @input="$emit('input',$event)"
+       @blur="$emit('blur',$event)" @focus="$emit('focus',$event)"/>
     <template v-if="error">
       <icon class="icon-error" name="error"></icon>
       <span>{{error}}</span>
@@ -8,11 +10,14 @@
   </div>
 </template>
 <script>
+  import Vue from 'vue'
+  import icon from './Icon'
+  Vue.component('icon',icon)
   export default {
     name: "Input",
     props: {
       value: {
-        type: String
+        type: String,
       },
       disabled: {
         type: Boolean,

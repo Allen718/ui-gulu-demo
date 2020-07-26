@@ -13,5 +13,10 @@ data:{
     loading1:false,
   loading2:false,
   loading3:false
+},
+methods:{
+    inputChange(e){
+      console.log(e.target.value)
+    }
 }
 })

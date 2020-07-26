@@ -16,6 +16,7 @@ describe('Button', () => {
         icon: 'settings'
       }
     }).$mount()
+    console.log(vm.$el)
     const useElement = vm.$el.querySelector('use')
     expect(useElement.getAttribute('xlink:href')).to.equal('#i-settings')
     vm.$destroy()
@@ -69,7 +70,6 @@ describe('Button', () => {
         icon: 'settings',
       }
     }).$mount()
-
     const callback = sinon.fake();
     vm.$on('click', callback)
     vm.$el.click()
