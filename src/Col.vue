@@ -1,6 +1,6 @@
 <template>
-  <div class="g-col" :class="[span&&`col-${span}`,offset&&`offset-${offset}`]"
-   :style="{paddingLeft:gutter/2+'px',paddingRight:gutter/2+'px'}">
+  <div class="g-col" :class="colClass"
+   :style="colStyle">
     <div style="border: 1px solid red">
       <slot/>
     </div>
@@ -19,6 +19,19 @@
     data(){
       return {
         gutter:0
+      }
+    },
+    computed:{
+      colStyle(){
+       let  gutter=this.gutter
+        return {
+          paddingLeft:gutter/2+'px',paddingRight:gutter/2+'px'
+        }
+      },
+      colClass(){
+        let span=this.span
+        let offset=this.offset
+        return [span&&`col-${span}`,offset&&`offset-${offset}`]
       }
     }
 
