@@ -2,7 +2,7 @@
   <div class="g-row" :style="rowStyle" :class="rowClass" >
     <slot/>
   </div>
-</template>
+</template>li
 
 <script>
   export default {
@@ -11,7 +11,7 @@
       gutter: {
         type:[String, Number]},
       align:{
-        type:string,
+        type:String,
         validator (value) {
           return ['left', 'right', 'center'].includes(value)
         }
@@ -42,5 +42,6 @@
     &.align-left{justify-content:flex-start }
     &.align-center{justify-content:center }
     display: flex;
+    flex-wrap: wrap;
   }
 </style>
