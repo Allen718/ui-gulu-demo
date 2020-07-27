@@ -37,7 +37,8 @@
 </head>
 <body>
 <div id="app">
-  <g-input value="张三"></g-input>
+  <g-input v-model="message"></g-input>
+  {{message}}
   <g-input value="lisa" disabled ></g-input>
   <g-input value="李四" readonly ></g-input>
   <g-input value="王大" error="密码不得少于六个字符"></g-input>
