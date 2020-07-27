@@ -50,12 +50,22 @@
       },
       colClass() {
         let {span, offset, ipad, narrowPc, pc, widePc} = this
-        return [span && `col-${span}`,
-          offset && `offset-${offset}`,
-          ipad && `col-ipad-${ipad.span}`,
-          narrowPc &&`col-narrowPc-${narrowPc.span}`,
-          pc && `col-pc-${pc.span}`,
-          widePc && `col-widePc-${widePc.span}`
+        let createclasses=(obj,str='')=>{
+          if(!obj){return []}
+          let arr=[]
+          if(obj.span){
+            arr.push(`col${str}-${obj.span}`)
+          }
+          if(obj.offset){arr.push(`offset${str}-${obj.offset}`)}
+          return arr
+        }
+        return [...createclasses(span),
+          ...createclasses(offset),
+          ...createclasses(ipad,'-ipad'),
+          ...createclasses(narrowPc,'-narrowPc'),
+         ...createclasses(pc,'-pc'),
+         ...createclasses(widePc,'-widePc')
+
         ]
       }
     },
@@ -69,7 +79,6 @@
   $class-prefix: col-;
   .g-col {
     height: 100px;
-    width: 50%;
     $class-prefix: col-;
     @for $n from 1 through 24 {
       &.#{$class-prefix}#{$n} {
