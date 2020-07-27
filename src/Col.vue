@@ -1,20 +1,34 @@
 <template>
-  <div class="g-col" :class="[`col-${span}`]"><slot></slot></div>
+  <div class="g-col" :class="[span&&`col-${span}`,offset&&`offset-${offset}`]"
+   :style="{paddingLeft:gutter/2+'px',paddingRight:gutter/2+'px'}">
+    <div style="border: 1px solid red">
+      <slot/>
+    </div>
+
+  </div>
 </template>
 
 <script>
   export default {
     name: "Col",
     props:{
-      span:[Number,String]
+      span:[Number,String],
+    offset:[Number,String],
+
+    },
+    data(){
+      return {
+        gutter:0
+      }
     }
+
   }
 </script>
 
 <style lang="scss" scoped>
+
   $class-prefix:col-;
 .g-col{
-border:1px solid red;
   height:100px;
   width:50%;
   $class-prefix:col-;
@@ -22,6 +36,12 @@ border:1px solid red;
     &.#{$class-prefix}#{$n}{
     width:($n/24)*100%;
   }
+  }
+  $class-prefix:offset-;
+  @for $n from 1 through 24{
+    &.#{$class-prefix}#{$n}{
+      margin-left:($n/24)*100%;
+    }
   }
 }
 </style>
