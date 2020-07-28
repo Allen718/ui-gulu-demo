@@ -25,52 +25,64 @@
     }
 
     #app {
-      margin: 20px;
+
     }
 
     body {
       font-size: var(--font-size);
     }
-
+.demo{
+  border:1px solid black;
+  min-height:100px
+}
   </style>
   <title>轱辘</title>
 </head>
 <body>
+
 <div id="app">
-  <div style="border: 1px solid black;height:200px">
+  <g-layout class="demo">
+    <g-header class="demo">header</g-header>
+    <g-layout class="demo">
+      <g-sider>sider</g-sider>
+   <g-content class="demo">content</g-content>
+    </g-layout>
+    <g-footer class="demo">footer</g-footer>
+  </g-layout>
+<!--  <div style="border: 1px solid black;height:200px">-->
 <!--    <g-row >-->
 <!--      <g-col :span="{span:20}" :offset="{offset:2}" :ipad="{span:12}" :narrow-pc="{span:8}"  :pc="{span:6}">1</g-col>-->
 <!--      <g-col :span="{span:24}" :ipad="{span:12}" :narrow-pc="{span:16}" :pc="{span:18}">2</g-col>-->
 <!--    </g-row>-->
-    <g-row >
-      <g-col :span="{span:10}">1</g-col>
-      <g-col :span="{span:10}" :offset="{offset:4}">2</g-col>
-    </g-row>
-  </div>
+<!--    <g-row >-->
+<!--      <g-col :span="{span:10}">1</g-col>-->
+<!--      <g-col :span="{span:10}" :offset="{offset:4}">2</g-col>-->
+<!--    </g-row>-->
+<!--  </div>-->
 
 
-  <div style="margin-top: 20px">
-    <g-input v-model="message"></g-input>
-    <g-input value="lisa" disabled></g-input>
-    <g-input value="李四" readonly></g-input>
-    <g-input value="王大" error="密码不得少于六个字符"></g-input>
-    <g-input value="请输入密码" @change="inputChange"></g-input>
-    <g-button icon="setting" icon-position="right" :loading="loading1" @click="loading1=!loading1">
-      按钮
-    </g-button>
-    <g-button :loading="loading2" @click="loading2=!loading2">
+<!--  <div style="margin-top: 20px">-->
+<!--    <g-input v-model="message"></g-input>-->
+<!--    <g-input value="lisa" disabled></g-input>-->
+<!--    <g-input value="李四" readonly></g-input>-->
+<!--    <g-input value="王大" error="密码不得少于六个字符"></g-input>-->
+<!--    <g-input value="请输入密码" @change="inputChange"></g-input>-->
+<!--    <g-button icon="setting" icon-position="right" :loading="loading1" @click="loading1=!loading1">-->
+<!--      按钮-->
+<!--    </g-button>-->
+<!--    <g-button :loading="loading2" @click="loading2=!loading2">-->
 
-      按钮
-    </g-button>
-    <g-button icon="setting" icon-position="left" :loading="loading3" @click="loading3=!loading3">
-      按钮
-    </g-button>
-    <button-group>
-      <g-button class="g-button" icon="left">上一页</g-button>
-      <g-button class="g-button">更多</g-button>
-      <g-button icon="right" icon-position="right">下一页</g-button>
-    </button-group>
-  </div>
+<!--      按钮-->
+<!--    </g-button>-->
+<!--    <g-button icon="setting" icon-position="left" :loading="loading3" @click="loading3=!loading3">-->
+<!--      按钮-->
+<!--    </g-button>-->
+<!--    <button-group>-->
+<!--      <g-button class="g-button" icon="left">上一页</g-button>-->
+<!--      <g-button class="g-button">更多</g-button>-->
+<!--      <g-button icon="right" icon-position="right">下一页</g-button>-->
+<!--    </button-group>-->
+<!--  </div>-->
 </div>
 <script src="./src/app.js"></script>
 </body>

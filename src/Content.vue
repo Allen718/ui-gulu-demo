@@ -9,5 +9,7 @@
 </script>
 
 <style scoped>
-
+.content{
+  flex-grow: 1;
+}
 </style>
