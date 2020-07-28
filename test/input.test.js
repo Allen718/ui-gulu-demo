@@ -56,7 +56,6 @@ describe("Input", () => {
           }
         }).$mount()
         const useElement = vm.$el.querySelector("use")
-        console.log(vm.$el)
         const spanElement = vm.$el.querySelector("span")
         expect(useElement.getAttribute("xlink:href")).to.equal("#i-error")
         expect(spanElement.innerText).to.equal("你设置的密码有误")
