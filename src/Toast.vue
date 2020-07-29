@@ -1,5 +1,6 @@
 <template>
-  <div class="toast" ref="wrapper">
+  <div class="wrapper" :class="addClass">
+  <div class="toast" ref="toast" >
     <slot v-if="!enableHtml"></slot>
     <div v-html="$slots.default[0]" v-else></div>
     <div class="line" ref="line"></div>
@@ -42,6 +43,7 @@
     methods: {
       closeToast() {
         this.$el.remove()
+        this.$emit('close')
         this.$destroy()
       },
       onClickClose() {
@@ -73,13 +75,7 @@
 
 <style lang="scss" scoped>
   .toast {
-    $font-size: 14px;
-    $toast-min-height: 40px;
-    $toast-bg: rgba(65, 105, 225, 0.75);
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+
     font-size: $font-size;
     line-height: 1.8;
     min-height: $toast-min-height;
