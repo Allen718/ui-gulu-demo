@@ -39,9 +39,20 @@
   <title>轱辘</title>
 </head>
 <body>
-
 <div id="app">
-  <button @click="showToast">点我</button>
+  <g-tabs :selected="selectedTab" @update:selected="selectedTab" :direction>
+    <g-tabs-head>
+      <g-tabs-item name="women">美女</g-tabs-item>
+      <g-tabs-item name="finance">财经</g-tabs-item>
+      <g-tabs-item name="sports">体育</g-tabs-item>
+    </g-tabs-head>
+    <g-tabs-body>
+      <g-tabs-pane name="women">假设有很多美女</g-tabs-pane>
+      <g-tabs-pane name="finance">最近基金大涨</g-tabs-pane>
+      <g-tabs-pane name="sports">乔丹死后的一段岁月</g-tabs-pane>
+    </g-tabs-body>
+  </g-tabs>
+<!--  <button @click="showToast">点我</button>-->
 <!--  <g-layout class="demo">-->
 <!--    <g-header class="demo">header</g-header>-->
 <!--    <g-layout class="demo">-->
@@ -51,9 +62,9 @@
 <!--    <g-footer class="demo">footer</g-footer>-->
 <!--  </g-layout>-->
 <!--  <div style="border: 1px solid black;height:200px">-->
-<!--    <g-row >-->
-<!--      <g-col :span="{span:20}" :offset="{offset:2}" :ipad="{span:12}" :narrow-pc="{span:8}"  :pc="{span:6}">1</g-col>-->
-<!--      <g-col :span="{span:24}" :ipad="{span:12}" :narrow-pc="{span:16}" :pc="{span:18}">2</g-col>-->
+<!--    <g-row  >-->
+<!--      <g-col :span="{span:24}"  :ipad="{'span':12}" :narrow-pc="{'span':8}"  :pc="{'span':6}">1</g-col>-->
+<!--      <g-col :span="{span:24}"  :ipad="{'span':12}" :narrow-pc="{'span':16}" :pc="{'span':18}">2</g-col>-->
 <!--    </g-row>-->
 <!--    <g-row >-->
 <!--      <g-col :span="{span:10}">1</g-col>-->

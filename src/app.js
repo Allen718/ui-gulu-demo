@@ -12,7 +12,11 @@ import Sider from "./Sider";
 import Footer from "./Footer";
 import Toast from "./Toast";
 import plugin from "./plugin";
-
+import Tabs from "./Tabs";
+import TabsHead from './Tabs-head'
+import TabsBody from './Tabs-body'
+import TabsItem from'./Tabs-item'
+import TabsPane from './Tabs-pane'
 Vue.component("g-input", Input)
 Vue.component("g-button", Button)
 Vue.component("icon", Icon)
@@ -26,6 +30,11 @@ Vue.component("g-sider", Sider)
 Vue.component("g-footer", Footer)
 Vue.component("g-toast", Toast)
 Vue.use(plugin)
+Vue.component('g-tabs',Tabs)
+Vue.component('g-tabs-head',TabsHead)
+Vue.component('g-tabs-body',TabsBody)
+Vue.component('g-tabs-pane',TabsPane)
+Vue.component('g-tabs-item',TabsItem)
 new Vue({
   el: "#app",
   data: {
@@ -41,7 +50,7 @@ new Vue({
             text: "你好", callback: () => {
               console.log("我知道了")
             }
-          },position:'bottom'
+          },position:'bottom',autoClose:1
         }
       )
     }
