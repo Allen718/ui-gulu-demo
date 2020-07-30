@@ -13,10 +13,9 @@
     let keys = Object.keys(value)
     let valid = true
     keys.forEach(key => {
-      if (!["span", "offset"].indexOf(key)) {
+      if (["span", "offset"].indexOf(key)===-1) {
         valid = false
       }
-
     })
     return valid
   }
@@ -26,10 +25,10 @@
 
     props: {
       span: {
-        type: [Number, String]
+        type: Object
       },
       offset: {
-        type: [Number, String]
+        type: Object
       },
       ipad: {type: Object, validator},
       narrowPc: {type: Object, validator},
@@ -75,7 +74,6 @@
 </script>
 
 <style lang="scss" scoped>
-
   $class-prefix: col-;
   .g-col {
     height: 100px;

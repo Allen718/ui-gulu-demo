@@ -4,7 +4,7 @@
     <slot v-if="!enableHtml"></slot>
     <div v-html="$slots.default[0]" v-else></div>
     <div class="line" ref="line"></div>
-    <div v-if="closeButton" @click="onClickClose">{{closeButton.text}}</div>
+    <div v-if="closeButton" class="close" @click="onClickClose">{{closeButton.text}}</div>
   </div>
   </div>
 </template>
@@ -14,12 +14,15 @@
     name: "Toast",
     props: {
       autoClose: {
-        type: Boolean,
-        default: true
-      },
-      closeDelay: {
-        type: Number,
-        default: 50,
+        type: [Boolean,Number],
+        default: true,
+        validator(value) {
+         if(value===true||typeof value==="number"){
+           return true
+         }else{
+           return false
+         }
+        }
       },
       closeButton: {
         type: Object,
@@ -44,7 +47,6 @@
     },
     methods: {
       closeToast() {
-        console.log('zhixing')
         this.$el.remove()
         this.$emit('close')
         this.$destroy()
@@ -56,9 +58,12 @@
         }
       },
       autoCloseToast() {
-        setTimeout(() => {
-          this.closeToast()
-        }, this.closeDelay * 1000)
+        if(this.autoClose){
+          setTimeout(() => {
+            this.closeToast()
+          }, this.autoClose * 1000)
+        }
+
       },
       updateStyle() {
         this.$nextTick(() => {

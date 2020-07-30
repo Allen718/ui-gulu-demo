@@ -2,7 +2,7 @@
   <div class="g-row" :style="rowStyle" :class="rowClass" >
     <slot/>
   </div>
-</template>li
+</template>
 
 <script>
   export default {
