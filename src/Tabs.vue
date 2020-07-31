@@ -1,10 +1,11 @@
 <template>
-  <div class="tabs">
+  <div class="tabs" >
     <slot></slot>
   </div>
 </template>
 
 <script>
+  import Vue from 'vue'
   export default {
     name: "Tabs",
     props:{
@@ -19,10 +20,25 @@
         validator(value){
           return['horizontal','vertical'].indexOf(value)>=0
         }
+      },
+
+    },
+    mounted() {
+this.eventBus.$emit('update:selected',this.selectedTab)
+    },
+    data(){
+      return {
+        eventBus: new Vue()
       }
     },
-    created() {
-      // this.$emit('update:selected',xxx)
+    methods:{
+
+    },
+
+    provide(){
+      return{
+        eventBus:this.eventBus
+      }
     }
   }
 </script>
