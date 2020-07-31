@@ -1,50 +1,58 @@
 <template>
-  <div class="tabs" >
+  <div class="tabs">
     <slot></slot>
   </div>
 </template>
 
 <script>
-  import Vue from 'vue'
+  import Vue from "vue"
+
   export default {
     name: "Tabs",
-    props:{
-      selectedTab:{
-        type:String,
-        required:true,
-        default:'sports'
+    props: {
+      selectedTab: {
+        type: String,
+        required: true,
+        default: "sports"
       },
-      direction:{
-        type:String,
-        default:'horizontal',
-        validator(value){
-          return['horizontal','vertical'].indexOf(value)>=0
+      direction: {
+        type: String,
+        default: "horizontal",
+        validator(value) {
+          return ["horizontal", "vertical"].indexOf(value) >= 0
         }
       },
 
     },
     mounted() {
-this.eventBus.$emit('update:selected',this.selectedTab)
+     this.$children.forEach((vm)=>{
+       if(vm.$options.name==='Tabs-head'){
+         vm.$children.forEach((item)=>{
+          if(item.$options.name==='Tabs-item'&& item.name===this.selectedTab){
+            this.eventBus.$emit("update:selected", this.selectedTab,item)
+          }
+         })
+       }
+     })
+
     },
-    data(){
+    data() {
       return {
         eventBus: new Vue()
       }
     },
-    methods:{
+    methods: {},
 
-    },
-
-    provide(){
-      return{
-        eventBus:this.eventBus
+    provide() {
+      return {
+        eventBus: this.eventBus
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-.tabs{
+  .tabs {
 
-}
+  }
 </style>

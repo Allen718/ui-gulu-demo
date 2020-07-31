@@ -20,17 +20,14 @@
     },
     inject:["eventBus"],
     created(){
-      this.eventBus.$on('update:selected',(selectedTab)=>{
-        if(this.name===selectedTab){
-          this.active=true
-        }else{
-          this.active=false
-        }
+      this.eventBus.$on('update:selected',(selectedTab,vm)=>{
+        console.log(vm.$el)
+        this.active = this.name === selectedTab;
       })
     },
     methods:{
     update(){
-        this.eventBus.$emit('update:selected',this.name)
+        this.eventBus.$emit('update:selected',this.name,this)
       }
     },
     computed:{
@@ -48,7 +45,7 @@ padding: 0 2em;
   align-items: center;
   height:100%;
   &.active{
-  background: blue;
+  color: blue;
 
 }
 }
