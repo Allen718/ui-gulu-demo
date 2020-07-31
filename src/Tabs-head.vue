@@ -12,7 +12,7 @@
   export default {
     name: "Tabs-head",
     inject:['eventBus'],
-   mounted(){
+  created(){
       this.eventBus.$on('update:selected',(selectedTab,vm)=>{
         let {width,left}=vm.$el.getBoundingClientRect()
         this.$refs.line.style.width=`${width}px`
@@ -31,6 +31,7 @@
   align-items: center;
   height: $tabs-head-height;
   position:relative;
+  border-bottom: 1px solid #dddddd;
   >.line{
     position:absolute;
     bottom:0;
@@ -39,6 +40,12 @@
   }
   >.actions-wrapper{
     margin-left: auto;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    >button{
+      margin-right:2em;
+    }
   }
 }
 </style>
