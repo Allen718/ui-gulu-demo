@@ -25,6 +25,9 @@
 
     },
     mounted() {
+      if(this.$children.length===0){
+       console&&console.warn&&console.warn('g-tabs里面应该只有g-head和g-body')
+      }
      this.$children.forEach((vm)=>{
        if(vm.$options.name==='Tabs-head'){
          vm.$children.forEach((item)=>{

@@ -1,10 +1,11 @@
 <template>
-  <div class="tabs-item" :class="classes" @click="update"><slot></slot></div>
+  <div class="tabs-item" :class="classes" @click="update" :dataname="this.name"><slot></slot></div>
 </template>
 
 <script>
   export default {
     name: "Tabs-item",
+    inject:["eventBus"],
     data(){
       return{active:false}
     },
@@ -18,35 +19,52 @@
         required:true,
       }
     },
-    inject:["eventBus"],
     created(){
-      this.eventBus.$on('update:selected',(selectedTab,vm)=>{
-        console.log(vm.$el)
-        this.active = this.name === selectedTab;
-      })
+      if(this.eventBus){
+        this.eventBus.$on('update:selected',(selectedTab)=>{
+         this.active = this.name === selectedTab;
+        })
+      }
+
     },
     methods:{
     update(){
-        this.eventBus.$emit('update:selected',this.name,this)
+      if(this.disabled){
+        return
+      }else{
+        if(this.eventBus){
+          this.eventBus.$emit('update:selected',this.name,this)
+          this.$emit('click',this)
+        }
+
+      }
+
       }
     },
     computed:{
       classes(){
-        return{active:this.active}
+        return{active:this.active,
+        disabled: this.disabled
+        }
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
+  $blue:blue;
+  $disabled-text-color: grey;
 .tabs-item{
 padding: 0 2em;
   display: flex;
   align-items: center;
   height:100%;
   &.active{
-  color: blue;
-
+  color: $blue;
 }
+  &.disabled{
+color:$disabled-text-color;
+    cursor: not-allowed;
+  }
 }
 </style>
