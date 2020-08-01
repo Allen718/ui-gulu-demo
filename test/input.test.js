@@ -71,17 +71,16 @@ describe("Input", () => {
       it("支持change/input/focus/blur事件", () => {
         ["change", "input", "focus", "blur"].forEach((eventName) => {
           vm = new Constructor(
-
           ).$mount()
           const callback = sinon.fake();
           vm.$on(eventName, callback)
           //触发input的change事件
           let event = new Event(eventName)
-          // Object.defineProperty(
-          //   event, 'target', {
-          //     value: {value: 'hi'}, enumerable: true
-          //   }
-          // )
+          Object.defineProperty(
+            event, 'target', {
+              value: {value: 'hi'}, enumerable: true
+            }
+          )
           let inputElement = vm.$el.querySelector("input")
           inputElement.dispatchEvent(event)
           expect(callback).to.have.been.called

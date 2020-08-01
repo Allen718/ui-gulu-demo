@@ -1,13 +1,9 @@
 <template>
   <div class="g-col" :class="colClass"
        :style="colStyle">
-    <div style="border: 1px solid red">
       <slot/>
-    </div>
-
   </div>
 </template>
-
 <script>
   let validator = (value) => {
     let keys = Object.keys(value)
@@ -25,10 +21,10 @@
 
     props: {
       span: {
-        type: Object
+        type: [Number,String]
       },
       offset: {
-        type: Object
+        type: [Number,String]
       },
       ipad: {type: Object, validator},
       narrowPc: {type: Object, validator},
@@ -40,6 +36,19 @@
         gutter: 0
       }
     },
+    methods:{
+      createClasses(obj,str=''){
+        if(!obj){return []}
+        let arr=[]
+        if(obj.span){
+          arr.push(`col${str}-${obj.span}`)
+        }
+        if(obj.offset){
+          arr.push(`offset${str}-${obj.offset}`)
+        }
+        return arr
+      }
+  },
     computed: {
       colStyle() {
         let gutter = this.gutter
@@ -49,22 +58,13 @@
       },
       colClass() {
         let {span, offset, ipad, narrowPc, pc, widePc} = this
-        let createclasses=(obj,str='')=>{
-          if(!obj){return []}
-          let arr=[]
-          if(obj.span){
-            arr.push(`col${str}-${obj.span}`)
-          }
-          if(obj.offset){arr.push(`offset${str}-${obj.offset}`)}
-          return arr
-        }
-        return [...createclasses(span),
-          ...createclasses(offset),
-          ...createclasses(ipad,'-ipad'),
-          ...createclasses(narrowPc,'-narrowPc'),
-         ...createclasses(pc,'-pc'),
-         ...createclasses(widePc,'-widePc')
-
+       let createClasses=this.createClasses
+        return [
+          ...createClasses({span, offset}),
+          ...createClasses(ipad,'-ipad'),
+          ...createClasses(narrowPc,'-narrowPc'),
+         ...createClasses(pc,'-pc'),
+         ...createClasses(widePc,'-widePc')
         ]
       }
     },

@@ -17,12 +17,10 @@ describe("Col", () => {
       const Constructor = Vue.extend(Col)
      const vm=new Constructor({
          propsData: {
-           span:{span:12}
+         span:15
          }
-     }
-     ).$mount(div)
-      const element = vm.$el
-      expect(vm.$el.classList.contains('col-12')).to.eq(true)
+     }).$mount(div)
+      expect(vm.$el.classList.contains('col-15')).to.eq(true)
       div.remove()
       vm.$destroy()
     })
@@ -32,11 +30,10 @@ describe("Col", () => {
         const Constructor = Vue.extend(Col)
         const vm = new Constructor({
           propsData: {
-             offset: {offset:1}
+             offset: 1
           }
         }).$mount(div)
         const element = vm.$el
-         console.log(element)
         expect(vm.$el.classList.contains('offset-1')).to.eq(true)
         div.remove()
         vm.$destroy()
@@ -51,7 +48,6 @@ describe("Col", () => {
       }
     }).$mount(div)
     const element = vm.$el
-    console.log(vm.$el)
     expect(vm.$el.classList.contains('col-pc-1')).to.eq(true)
     expect(vm.$el.classList.contains('offset-pc-2')).to.eq(true)
     div.remove()

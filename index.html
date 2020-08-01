@@ -40,21 +40,24 @@
 </head>
 <body>
 <div id="app">
-  <g-tabs :selected-tab="selectedTab">
-    <g-tabs-head>
-      <g-tabs-item name="women">美女</g-tabs-item>
-      <g-tabs-item name="finance">财经</g-tabs-item>
-      <g-tabs-item name="sports">体育</g-tabs-item>
-      <template slot="actions">
-         <button>设置</button>
-      </template>
-    </g-tabs-head>
-    <g-tabs-body>
-      <g-tabs-pane name="women">假设有很多美女</g-tabs-pane>
-      <g-tabs-pane name="finance">最近基金大涨</g-tabs-pane>
-      <g-tabs-pane name="sports">乔丹死后的一段岁月</g-tabs-pane>
-    </g-tabs-body>
-  </g-tabs>
+<!--  <g-tabs>-->
+<!--    <div></div>-->
+<!--  </g-tabs>-->
+<!--  <g-tabs :selected-tab="selectedTab">-->
+<!--    <g-tabs-head>-->
+<!--      <g-tabs-item name="women" disabled>美女</g-tabs-item>-->
+<!--      <g-tabs-item name="finance">财经</g-tabs-item>-->
+<!--      <g-tabs-item name="sports">体育</g-tabs-item>-->
+<!--      <template slot="actions">-->
+<!--         <button >设置</button>-->
+<!--      </template>-->
+<!--    </g-tabs-head>-->
+<!--    <g-tabs-body>-->
+<!--      <g-tabs-pane name="women">假设有很多美女</g-tabs-pane>-->
+<!--      <g-tabs-pane name="finance">最近基金大涨</g-tabs-pane>-->
+<!--      <g-tabs-pane name="sports">乔丹死后的一段岁月</g-tabs-pane>-->
+<!--    </g-tabs-body>-->
+<!--  </g-tabs>-->
 <!--  <button @click="showToast">点我</button>-->
 <!--  <g-layout class="demo">-->
 <!--    <g-header class="demo">header</g-header>-->
@@ -65,10 +68,10 @@
 <!--    <g-footer class="demo">footer</g-footer>-->
 <!--  </g-layout>-->
 <!--  <div style="border: 1px solid black;height:200px">-->
-<!--    <g-row  >-->
-<!--      <g-col :span="{span:24}"  :ipad="{'span':12}" :narrow-pc="{'span':8}"  :pc="{'span':6}">1</g-col>-->
-<!--      <g-col :span="{span:24}"  :ipad="{'span':12}" :narrow-pc="{'span':16}" :pc="{'span':18}">2</g-col>-->
-<!--    </g-row>-->
+    <g-row  >
+      <g-col :span="{span:24}"  :ipad="{'span':12}" :narrow-pc="{'span':8}"  :pc="{'span':6}">1</g-col>
+      <g-col :span="{span:24}"  :ipad="{'span':12}" :narrow-pc="{'span':16}" :pc="{'span':18}">2</g-col>
+    </g-row>
 <!--    <g-row >-->
 <!--      <g-col :span="{span:10}">1</g-col>-->
 <!--      <g-col :span="{span:10}" :offset="{offset:4}">2</g-col>-->
