@@ -19,59 +19,55 @@
         visible: false
       }
     },
-    props:{
-      position:{
-        type:String,
-        default:'top',
-        validator(value){
-         return  ['top','bottom','left','right'].indexOf(value)>=0
+    props: {
+      position: {
+        type: String,
+        default: "top",
+        validator(value) {
+          return ["top", "bottom", "left", "right"].indexOf(value) >= 0
         }
 
       }
-  },
+    },
     methods: {
       positionContent() {
-          document.body.appendChild(this.$refs.contentWrapper)
-        const{contentWrapper,triggerWrapper}=this.$refs
-        let { width,left, top,bottom,height} = triggerWrapper.getBoundingClientRect()
-        let height1=contentWrapper.getBoundingClientRect().height
-        contentWrapper.style.left = left + window.scrollX + "px"
-        if(this.position==='top'){
-         contentWrapper.style.top = top+ window.scrollY + "px"
-        }else if(this.position==='bottom'){
-          contentWrapper.style.top = bottom+ window.scrollY + "px"
-        }else if(this.position==='left'){
-          contentWrapper.style.top = top-(height1-height)/2+ window.scrollY + "px"
-          contentWrapper.style.left = left + window.scrollX + "px"
-        }else if(this.position==='right'){
-          contentWrapper.style.top = top-(height1-height)/2+ window.scrollY + "px"
-          contentWrapper.style.left = left +width+ window.scrollX + "px"
+        document.body.appendChild(this.$refs.contentWrapper)
+        const {contentWrapper, triggerWrapper} = this.$refs
+        let {width, left, top, bottom, height} = triggerWrapper.getBoundingClientRect()
+        let height1 = contentWrapper.getBoundingClientRect().height
+        const position = {
+          top: {top: top+ window.scrollY , left: left + window.scrollX },
+          bottom: {top: top+ window.scrollY +height, left: left + window.scrollX },
+          left: {top: top-(height1-height)/2+ window.scrollY, left: left + window.scrollX },
+          right: {top: top-(height1-height)/2+ window.scrollY, left: left +width+ window.scrollX}
         }
-        },
+        contentWrapper.style.top=position[this.position].top+'px'
+        contentWrapper.style.left=position[this.position].left+'px'
+      },
       eventHandler(e) {
-        if (this.$refs.contentWrapper && (this.$refs.contentWrapper.contains(e.target))||this.$refs.popover.contains(e.target)) {
+        if (this.$refs.contentWrapper && (this.$refs.contentWrapper.contains(e.target)) || this.$refs.popover.contains(e.target)) {
         } else {
           this.close()
         }
       },
       open() {
-        this.visible=!this.visible
+        this.visible = !this.visible
         setTimeout(() => {
           this.positionContent()
           document.addEventListener("click", this.eventHandler)
         }, 0)
       },
-      close(){
-        this.visible=false
+      close() {
+        this.visible = false
         document.removeEventListener("click", this.eventHandler)
       },
       Click(e) {
         if (this.$refs.triggerWrapper.contains(e.target)) {
           if (this.visible === true) {
             this.close()
-          }else{
+          } else {
             this.open()
-            console.log('关闭吧')
+            console.log("关闭吧")
           }
         }
 
@@ -83,12 +79,13 @@
 </script>
 
 <style lang="scss" scoped>
-  $border-color:#333;
-  $border-radius:4px;
+  $border-color: #333;
+  $border-radius: 4px;
   .popover {
     display: inline-block;
     vertical-align: top;
-    >span{
+
+    > span {
       display: inline-block;
     }
   }
@@ -102,63 +99,92 @@
     padding: 0.5em 1em;
     max-width: 20em;
     border-radius: $border-radius;
-    &::after,&::before{
-      content:'';
-      width:0;
-      height:0;
-      border:10px solid transparent;
-      position:absolute;
-     }
-    &.position-top{
-     transform: translateY(-100%);
+
+    &::after, &::before {
+      content: '';
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      position: absolute;
+    }
+
+    &.position-top {
+      transform: translateY(-100%);
       margin-top: -10px;
-      &::after,&::before{
-        left:10px;
+
+      &::after, &::before {
+        left: 10px;
 
       }
-      &::after{border-top-color: #ffffff;
-        top:calc(100% - 2px);
+
+      &::after {
+        border-top-color: #ffffff;
+        top: calc(100% - 2px);
       }
-      &::before{border-top-color:#333333; top:100%}
+
+      &::before {
+        border-top-color: #333333;
+        top: 100%
+      }
     }
-    &.position-bottom{
+
+    &.position-bottom {
       margin-top: 10px;
-      &::after,&::before{
-        left:10px;
+
+      &::after, &::before {
+        left: 10px;
       }
-      &::after{border-bottom-color: #ffffff;bottom:calc(100% - 2px);}
-      &::before{border-bottom-color:#333333;bottom:100%;}
+
+      &::after {
+        border-bottom-color: #ffffff;
+        bottom: calc(100% - 2px);
+      }
+
+      &::before {
+        border-bottom-color: #333333;
+        bottom: 100%;
+      }
 
     }
-    &.position-left{
-    transform: translateX(-100%);
+
+    &.position-left {
+      transform: translateX(-100%);
       margin-left: -10px;
-      &::after,&::before{
-        right:0;
-        top:6px;
-       transform: translateX(100%);
+
+      &::after, &::before {
+        right: 0;
+        top: 6px;
+        transform: translateX(100%);
       }
-      &::after{
+
+      &::after {
         border-left-color: #ffffff;
         transform: translateX(calc(100% - 2px));
 
       }
-      &::before{border-left-color:#333333;
-    }
+
+      &::before {
+        border-left-color: #333333;
+      }
 
     }
-    &.position-right{
-margin-left: 10px;
-      &::after,&::before{
-       left:0;
-        top:6px;
+
+    &.position-right {
+      margin-left: 10px;
+
+      &::after, &::before {
+        left: 0;
+        top: 6px;
         transform: translateX(-100%);
       }
-      &::after{
+
+      &::after {
         border-right-color: #ffffff;
         transform: translateX(calc(-100% + 2px));
       }
-      &::before{border-right-color:#333333;
+
+      &::before {
+        border-right-color: #333333;
       }
     }
   }
