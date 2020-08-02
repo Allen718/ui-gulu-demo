@@ -62,16 +62,37 @@
 </script>
 
 <style lang="scss" scoped>
+  $border-color:#333;
+  $border-radius:4px;
   .popover {
-
     display: inline-block;
     vertical-align: top;
+    >span{
+      display: inline-block;
+    }
   }
 
   .content-wrapper {
-    border: 1px solid red;
+    border: 1px solid $border-color;
     position: absolute;
     transform: translateY(-100%);
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+    background-color: #ffffff;
+    /*box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);*/
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.7));
+    padding: 0.5em 1em;
+    max-width: 20em;
+    border-radius: $border-radius;
+    margin-top: -12px;
+    &::after,&::before{
+      content:'';
+      width:0;
+      height:0;
+      border:12px solid transparent;
+      position:absolute;
+      left:12px;
+      top:100%
+    }
+    &::after{border-top-color: #ffffff;top:calc(100% - 2px);}
+    &::before{border-top-color:#333333}
   }
 </style>
