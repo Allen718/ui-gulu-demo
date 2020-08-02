@@ -39,7 +39,22 @@
   <title>轱辘</title>
 </head>
 <body>
-<div id="app">
+<div id="app" style="padding: 100px 100px;border:1px solid red;">
+  <div style="overflow:hidden;border:1px solid green">
+    <g-popover>
+      <template slot="content" >
+        <div>这是内容</div>
+      </template>
+      <button>点我</button>
+    </g-popover>
+    <g-popover>
+      <template slot="content" >
+        <div>这是内容2</div>
+      </template>
+      <button>点我</button>
+    </g-popover>
+  </div>
+
 <!--  <g-tabs>-->
 <!--    <div></div>-->
 <!--  </g-tabs>-->
@@ -68,10 +83,10 @@
 <!--    <g-footer class="demo">footer</g-footer>-->
 <!--  </g-layout>-->
 <!--  <div style="border: 1px solid black;height:200px">-->
-    <g-row  >
-      <g-col :span="{span:24}"  :ipad="{'span':12}" :narrow-pc="{'span':8}"  :pc="{'span':6}">1</g-col>
-      <g-col :span="{span:24}"  :ipad="{'span':12}" :narrow-pc="{'span':16}" :pc="{'span':18}">2</g-col>
-    </g-row>
+<!--    <g-row  >-->
+<!--      <g-col :span="{span:24}"  :ipad="{'span':12}" :narrow-pc="{'span':8}"  :pc="{'span':6}">1</g-col>-->
+<!--      <g-col :span="{span:24}"  :ipad="{'span':12}" :narrow-pc="{'span':16}" :pc="{'span':18}">2</g-col>-->
+<!--    </g-row>-->
 <!--    <g-row >-->
 <!--      <g-col :span="{span:10}">1</g-col>-->
 <!--      <g-col :span="{span:10}" :offset="{offset:4}">2</g-col>-->
