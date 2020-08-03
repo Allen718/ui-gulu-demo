@@ -1,6 +1,6 @@
 <template>
   <div class="collapse-item">
-    <div class="title" @click="open=!open">
+    <div class="title" @click="toggle">
       {{title}}
     </div>
     <div class="content" v-if="open">
@@ -12,53 +12,72 @@
 <script>
   export default {
     name: "Collapse-item",
-    props:{
-      title:{
-        type:String,
-        required:true,
+    props: {
+      title: {
+        type: String,
+        required: true,
       }
     },
-    data(){
+    inject: ["eventBus"],
+    data() {
       return {
-        open:false
+        open: false
       }
+    },
+    methods: {
+      toggle() {
+        if (this.open === false) {
+          this.open = true
+          this.eventBus && this.eventBus.$emit("update:selected", this)
+        } else {
+          this.open = false
+        }
+      }
+    },
+    mounted() {
+      this.eventBus && this.eventBus.$on("update:selected", (vm) => {
+        if (vm !== this) {
+          this.open = false
+        }
+      })
     }
   }
+
 </script>
 
 <style lang="scss" scoped>
-.collapse-item {
-  > .title {
-    border: 1px solid grey;
-    margin-top: -1px;
-    margin-right: -1px;
-    margin-left: -1px;
-    min-height: 32px;
-    padding: 0 8px;
-  }
-
-  > .content {
-    padding: 0 8px;
-  }
-
-  &:first-child {
+  .collapse-item {
     > .title {
-
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
+      border: 1px solid grey;
+      margin-top: -1px;
+      margin-right: -1px;
+      margin-left: -1px;
+      min-height: 32px;
+      padding: 0 8px;
     }
 
+    > .content {
+      padding: 0 8px;
+    }
 
+    &:first-child {
+      > .title {
 
-  }
-  &:last-child {
-    > .title:last-child {
-      border-bottom-left-radius: 4px;
-      border-bottom-right-radius: 4px;
-      border-bottom:none;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+      }
 
 
     }
+
+    &:last-child {
+      > .title:last-child {
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-bottom: none;
+
+
+      }
+    }
   }
-}
 </style>
