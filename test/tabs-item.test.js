@@ -14,7 +14,7 @@ Vue.config.productionTip = false
 Vue.config.devtools = false
 describe("Tabs-item", () => {
     it("存在.", () => {
-      expect(TabsItem).to.be.exist
+      expect(TabsItem).to.be.ok
     })
   it('接受 name 属性', () => {
     const Constructor = Vue.extend(TabsItem)
@@ -29,6 +29,7 @@ describe("Tabs-item", () => {
     const Constructor = Vue.extend(TabsItem)
     const vm = new Constructor({
       propsData: {
+        name:'xxx',
         disabled: true,
       }
     }).$mount()

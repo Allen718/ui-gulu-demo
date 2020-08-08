@@ -5,7 +5,6 @@ import TabsHead from "../src/Tabs-head"
 import TabsBody from "../src/Tabs-body"
 import TabsItem from "../src/Tabs-item"
 import TabsPane from "../src/Tabs-pane"
-
 Vue.component("g-tabs", Tabs)
 Vue.component("g-tabs-head", TabsHead)
 Vue.component("g-tabs-body", TabsBody)
