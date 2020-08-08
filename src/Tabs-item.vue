@@ -1,5 +1,7 @@
 <template>
-  <div class="tabs-item" :class="classes" @click="update" :dataname="this.name"><slot></slot></div>
+  <div class="tabs-item" :class="classes" @click="update" :dataname="this.name">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -22,7 +24,8 @@
     created(){
       if(this.eventBus){
         this.eventBus.$on('update:selected',(selectedTab)=>{
-         this.active = this.name === selectedTab;
+          this.active = this.name === selectedTab;
+
         })
       }
 
@@ -59,6 +62,7 @@ padding: 0 2em;
   display: flex;
   align-items: center;
   height:100%;
+  position:relative;
   &.active{
   color: $blue;
 }

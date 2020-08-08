@@ -18,7 +18,6 @@
 
   export default {
     name: "Col",
-
     props: {
       span: {
         type: [Number,String]
@@ -76,7 +75,7 @@
 <style lang="scss" scoped>
   $class-prefix: col-;
   .g-col {
-    height: 100px;
+    height: 50px;
     $class-prefix: col-;
     @for $n from 1 through 24 {
       &.#{$class-prefix}#{$n} {
@@ -125,7 +124,7 @@
         }
       }
       $class-prefix: offset-pc-;
-      @for $n from 1 through 24 {
+      @for $n from 0 through 24 {
         &.#{$class-prefix}#{$n} {
           margin-left: ($n / 24) * 100%;
         }
@@ -133,15 +132,15 @@
     }
     @media (min-width: 1200px) {
       $class-prefix: col-widePc-;
-      @for $n from 1 through 24 {
+      @for $n from 0 through 24 {
         &.#{$class-prefix}#{$n} {
           width: ($n / 24) * 100%;
         }
       }
       $class-prefix: offset-widePc-;
-      @for $n from 1 through 24 {
+      @for $n from 0 through 24 {
         &.#{$class-prefix}#{$n} {
-          margin-left: ($n / 24) * 100%;
+        margin-left: ($n / 24) * 100%;
         }
       }
     }

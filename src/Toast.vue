@@ -3,7 +3,7 @@
   <div class="toast" ref="toast" >
     <slot v-if="!enableHtml"></slot>
     <div v-html="$slots.default[0]" v-else></div>
-    <div class="line" ref="line"></div>
+    <div class="line" v-if="closeButton"   ref="line"></div>
     <div v-if="closeButton" class="close" @click="onClickClose">{{closeButton.text}}</div>
   </div>
   </div>
@@ -15,7 +15,7 @@
     props: {
       autoClose: {
         type: [Boolean,Number],
-        default: true,
+        default: 3,
         validator(value) {
          if(value===true||typeof value==="number"){
            return true
@@ -26,11 +26,11 @@
       },
       closeButton: {
         type: Object,
-        default() {
-          return {
-            text: "关闭", callback: undefined
-          }
-        }
+        // default() {
+        //   return {
+        //     text: "关闭", callback: undefined
+        //   }
+        // }
       },
       enableHtml: {
         type: Boolean,
@@ -38,7 +38,7 @@
       },
       position: {
         type: String,
-        default: 'top',
+        default: 'bottom',
         validator(value) {
           return ["top", "middle", "bottom"].indexOf(value) >= 0
         }
@@ -109,6 +109,7 @@
     &.position-top{
       top: 0;
       transform: translateX(-50%);
+      z-index: 30;
       >.toast{
         border-top-left-radius: 0;
         border-top-right-radius: 0;
@@ -154,7 +155,7 @@
     > div {
       flex-shrink: 0;
       text-align: center;
-      padding-left: 16px;
+      padding-left: 12px;
     }
   }
 </style>

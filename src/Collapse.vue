@@ -1,7 +1,6 @@
 <template>
   <div class="collapse">
     <slot>
-
     </slot>
   </div>
 </template>
@@ -18,7 +17,10 @@
 
       },
       selected: {
-        type: Array
+        type: Array,
+        default(){
+          return []
+        }
 
       }
     },
@@ -47,7 +49,6 @@
         }else{
        selectedCopy.splice(index, 1)
         }
-
         this.eventBus.$emit("update:selected", selectedCopy)
         this.$emit("update:selected", selectedCopy)
       })

@@ -13,7 +13,7 @@
       selectedTab: {
         type: String,
         required: true,
-        default: "sports"
+
       },
       direction: {
         type: String,

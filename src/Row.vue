@@ -13,7 +13,7 @@
       align:{
         type:String,
         validator (value) {
-          return ['left', 'right', 'center'].includes(value)
+          return ['bottom', 'top', 'center'].includes(value)
         }
       }
     },
@@ -38,9 +38,9 @@
 
 <style lang="scss" scoped>
   .g-row {
-    &.align-right{justify-content:flex-end }
-    &.align-left{justify-content:flex-start }
-    &.align-center{justify-content:center }
+    &.align-bottom{align-items:flex-end }
+    &.align-top{align-items:flex-start }
+    &.align-center{align-items:center }
     display: flex;
     flex-wrap: wrap;
   }

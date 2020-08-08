@@ -1,12 +1,11 @@
 <template>
-  <div class="popover" @click="Click" ref="popover">
-    <div v-if=" visible" class="content-wrapper" ref="contentWrapper" :class="{[ `position-${this.position}`]:true}">
-      <slot name="content"></slot>
+  <div class="popover"  ref="popover">
+    <div v-show="visible" class="content-wrapper" ref="contentWrapper" :class="{[ `position-${this.position}`]:true}">
+      <slot name="content" :close="this.close"></slot>
     </div>
     <span ref="triggerWrapper">
       <slot></slot>
     </span>
-
   </div>
 
 </template>
@@ -19,6 +18,21 @@
         visible: false
       }
     },
+    computed:{
+      openEvent(){
+        if(this.trigger==='click')
+        { return 'click'}else{
+          return 'mouseenter'
+        }
+
+      },
+      closeEvent(){
+        if(this.trigger==='click')
+        { return 'click'}else{
+          return 'mouseLeave'
+        }
+      }
+    },
     props: {
       position: {
         type: String,
@@ -27,22 +41,48 @@
           return ["top", "bottom", "left", "right"].indexOf(value) >= 0
         }
 
+      },
+      trigger:{
+        type:String,
+        default:'click',
+        validator(value){
+          return['click','hover'].indexOf(value)>=0
+        }
       }
     },
+    mounted() {
+      if(this.openEvent==='click'){
+        this.$refs.popover.addEventListener('click',this.Click)
+      }else{
+        this.$refs.popover.addEventListener('mouseenter', this.open)
+        this.$refs.popover.addEventListener('mouseleave', this.close)
+      }
+
+
+
+    },
+    // destroyed () {
+    //   if (this.trigger === 'click') {
+    //     this.$refs.popover.removeEventListener('click', this.Click)
+    //   } else {
+    //     this.$refs.popover.removeEventListener('mouseenter', this.open)
+    //     this.$refs.popover.removeEventListener('mouseleave', this.close)
+    //   }
+    // },
     methods: {
       positionContent() {
-        document.body.appendChild(this.$refs.contentWrapper)
         const {contentWrapper, triggerWrapper} = this.$refs
+        document.body.appendChild(contentWrapper)
         let {width, left, top, bottom, height} = triggerWrapper.getBoundingClientRect()
         let height1 = contentWrapper.getBoundingClientRect().height
         const position = {
-          top: {top: top+ window.scrollY , left: left + window.scrollX },
-          bottom: {top: top+ window.scrollY +height, left: left + window.scrollX },
-          left: {top: top-(height1-height)/2+ window.scrollY, left: left + window.scrollX },
-          right: {top: top-(height1-height)/2+ window.scrollY, left: left +width+ window.scrollX}
+          top: {top: top + window.scrollY, left: left + window.scrollX},
+          bottom: {top: top + window.scrollY + height, left: left + window.scrollX},
+          left: {top: top - (height1 - height) / 2 + window.scrollY, left: left + window.scrollX},
+          right: {top: top - (height1 - height) / 2 + window.scrollY, left: left + width + window.scrollX}
         }
-        contentWrapper.style.top=position[this.position].top+'px'
-        contentWrapper.style.left=position[this.position].left+'px'
+        contentWrapper.style.top = position[this.position].top + "px"
+        contentWrapper.style.left = position[this.position].left + "px"
       },
       eventHandler(e) {
         if (this.$refs.contentWrapper && (this.$refs.contentWrapper.contains(e.target)) || this.$refs.popover.contains(e.target)) {
@@ -55,11 +95,13 @@
         setTimeout(() => {
           this.positionContent()
           document.addEventListener("click", this.eventHandler)
-        }, 0)
+
+        },0)
       },
       close() {
         this.visible = false
         document.removeEventListener("click", this.eventHandler)
+
       },
       Click(e) {
         if (this.$refs.triggerWrapper.contains(e.target)) {
@@ -67,7 +109,6 @@
             this.close()
           } else {
             this.open()
-            console.log("关闭吧")
           }
         }
 
@@ -91,6 +132,7 @@
   }
 
   .content-wrapper {
+    font-size: 14px;
     border: 1px solid $border-color;
     position: absolute;
     background-color: #ffffff;

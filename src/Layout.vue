@@ -15,7 +15,6 @@
       }
     },
     mounted() {
-      console.log(this.$children)
       this.$children.forEach(vm=>{
         if(vm.$options.name==='Sider'){
             this.layoutClass.hasSider=true
@@ -30,7 +29,6 @@
   display: flex;
   flex-grow:1;
   flex-direction: column;
-  height:100vh;
   &.hasSider{
   flex-direction: row;
 
