@@ -24,32 +24,33 @@
 
       }
     },
-
     data() {
       return {eventBus: new Vue()}
     },
+
     provide() {
       return {eventBus: this.eventBus}
     },
+
     mounted() {
      let selectedCopy=JSON.parse(JSON.stringify(this.selected))
       this.eventBus.$emit("update:selected", selectedCopy)
       this.eventBus.$on("add:selected", (name) => {
         if (this.single) {
           selectedCopy = [name]
-        } else {selectedCopy.push(name)}
+        } else {
+          selectedCopy.push(name)}
         this.eventBus.$emit("update:selected", selectedCopy)
         this.$emit("update:selected", selectedCopy)
       })
       this.eventBus.$on("remove:selected", (name) => {
-        let selectedCopy=JSON.parse(JSON.stringify(this.selected))
         const index = selectedCopy.indexOf(name)
         if(this.single){
           selectedCopy=[name]
         }else{
        selectedCopy.splice(index, 1)
         }
-        this.eventBus.$emit("update:selected", selectedCopy)
+        this.eventBus.$emit("update:selected",  selectedCopy.splice(index, 1))
         this.$emit("update:selected", selectedCopy)
       })
 

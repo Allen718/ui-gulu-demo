@@ -10,8 +10,10 @@
 </template>
 
 <script>
+  import Vue from "vue"
   export default {
     name: "Collapse-item",
+    inject:['eventBus'],
     props: {
       title: {
         type: String,
@@ -22,20 +24,21 @@
         required:true
       }
     },
-    inject: ["eventBus"],
+
     data() {
       return {
         open: false,
-        single:false
+
       }
     },
+
     methods: {
       toggle() {
         if (this.open === false) {
           this.eventBus && this.eventBus.$emit("add:selected", this.name)
         } else {
           this.eventBus.$emit('remove:selected',this.name)
-          this.open = false
+           this.open = false
         }
       }
     },
